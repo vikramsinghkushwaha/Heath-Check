@@ -1,0 +1,42 @@
+
+sudo amazon-linux-extras install docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+docker info
+touch Dockerfile
+
+//File - DockerFile
+
+FROM ubuntu:18.04
+
+# Install dependencies
+RUN apt-get update && \
+ apt-get -y install apache2
+
+# Install apache and write hello world message
+RUN echo 'Hello World!' > /var/www/html/index.html
+
+# Configure apache
+RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh && \
+ echo 'mkdir -p /var/run/apache2' >> /root/run_apache.sh && \
+ echo 'mkdir -p /var/lock/apache2' >> /root/run_apache.sh && \ 
+ echo '/usr/sbin/apache2 -D FOREGROUND' >> /root/run_apache.sh && \ 
+ chmod 755 /root/run_apache.sh
+
+EXPOSE 80
+
+HEALTHCHECK CMD curl --fail http://localhost:80/ || exit 1
+
+CMD /root/run_apache.sh
+
+// Completed 
+
+docker build -t hello-world .
+
+
+docker images --filter reference=hello-world
+docker run -t -i -p 80:80 hello-world
+
+docker inspect --format='{{json .State.Health}}' hello-world 
+
+
