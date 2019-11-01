@@ -1,0 +1,17 @@
+docker version
+docker pull redis
+docker network create red_cluster
+docker network ls
+
+docker run -d -v \
+$PWD/cluster-config.conf:/usr/local/etc/redis/redis.conf \
+--name redis-1 --net red_cluster \
+redis redis-server /usr/local/etc/redis/redis.conf
+
+//Create multiple nodes
+
+docker inspect -f '{{ (index .NetworkSettings.Networks "red_cluster").IPAddress }}' redis-1
+docker inspect -f '{{ (index .NetworkSettings.Networks "red_cluster").IPAddress }}' redis-2
+docker inspect -f '{{ (index .NetworkSettings.Networks "red_cluster").IPAddress }}' redis-3
+
+
