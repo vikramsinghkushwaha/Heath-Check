@@ -1,0 +1,9 @@
+https://redis.io/topics/cluster-tutorial
+
+https://www.alibabacloud.com/help/doc-detail/58588.htm
+
+https://medium.com/commencis/creating-redis-cluster-using-docker-67f65545796d
+
+https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html
