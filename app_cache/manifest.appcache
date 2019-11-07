@@ -1,0 +1,10 @@
+CACHE MANIFEST
+#DATE 2019-11-07
+CACHE:
+/style.css
+
+NETWORK:
+*
+
+FALLBACK:
+#static.html
